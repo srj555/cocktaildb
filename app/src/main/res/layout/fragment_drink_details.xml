@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="drinkDetails"
+            type="com.srdroid.cocktail.domain.model.DrinkDetails" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        tools:context=".presentation.drink_details.DrinkDetailsFragment">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bgIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="-8dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/detailsIV"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:contentDescription="@null"
+                        android:elevation="4dp"
+                        android:scaleType="fitCenter"
+                        app:urlToImage="@{drinkDetails.image}" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/instructionsTV"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:text="@string/instructions"
+                    android:fontFamily="@font/pacific_regular"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bgIV" />
+
+                <TextView
+                    android:id="@+id/instructionsDetailsTV"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:text="@{drinkDetails.instructions}"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/instructionsTV"
+                    app:layout_constraintTop_toBottomOf="@+id/instructionsTV"
+                    tools:text="Instructions" />
+
+
+                <TextView
+                    android:id="@+id/reqItemHTV"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/items"
+                    android:fontFamily="@font/pacific_regular"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/instructionsDetailsTV"
+                    app:layout_constraintTop_toBottomOf="@+id/instructionsDetailsTV" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient1.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItemHTV"
+                    android:layout_marginRight="@dimen/default_margin"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItemHTV">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient1}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure1}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient2.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/instructionsTV"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem1">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:text="@{drinkDetails.ingredient2}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure2}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient3.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem2"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem2">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient3}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.ingredient3}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient4.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem3"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem3">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:text="@{drinkDetails.ingredient4}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure4}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient5.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem4"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem4">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient5}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure5}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient6.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem5"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem5">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient6}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure6}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient7.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem6"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem6">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient7}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure7}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/reqItem8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="@{drinkDetails.ingredient8.length()==0?View.GONE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="@+id/reqItem7"
+                    app:layout_constraintRight_toRightOf="@+id/reqItem1"
+                    app:layout_constraintTop_toBottomOf="@+id/reqItem7">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{drinkDetails.ingredient8}"
+                        tools:text="test" />
+
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@{drinkDetails.measure8}"
+                        tools:text="2 items" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
