@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.srdroid.cocktail.R
 import com.srdroid.cocktail.databinding.FragmentDrinkSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DrinkSearchFragment : Fragment(), SearchView.OnQueryTextListener {
 

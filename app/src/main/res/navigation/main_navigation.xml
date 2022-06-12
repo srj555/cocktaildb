@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/drinkSearchFragment"
         android:name="com.srdroid.cocktail.presentation.drink_search.DrinkSearchFragment"
-        android:label="Cocktail "
+        android:label="Cocktail db "
         tools:layout="@layout/fragment_drink_search">
         <action
             android:id="@+id/action_drinkSearchFragment_to_drinkDetailsFragment"
