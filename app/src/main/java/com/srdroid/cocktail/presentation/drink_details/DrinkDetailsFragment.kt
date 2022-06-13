@@ -19,8 +19,10 @@ class DrinkDetailsFragment : Fragment() {
 
     // ui
     private lateinit var _binding: FragmentDrinkDetailsBinding
+
     // view model
     private val viewModel: DrinkDetailsViewModel by viewModels()
+
     // nav args
     private val args: DrinkDetailsFragmentArgs by navArgs()
 
@@ -44,15 +46,34 @@ class DrinkDetailsFragment : Fragment() {
     private fun updateUIBasedOnResult() {
         lifecycle.coroutineScope.launchWhenCreated {
             viewModel.drinkDetails.collect { result ->
+                if (result.isLoading) {
+                    updateProgress(true)
+                }
                 // error state
                 if (result.error.isNotBlank()) {
+                    updateProgress(false)
                     Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                 }
                 // success state
                 result.data?.let {
+                    updateProgress(false)
                     _binding.drinkDetails = it
                 }
             }
+
+        }
+    }
+
+    /**
+     * Detail progress UI update
+     */
+    private fun updateProgress(showProgress: Boolean) {
+        if (showProgress) {
+            _binding.detailsSV.visibility = View.INVISIBLE
+            _binding.progressDrinkDetail.visibility = View.VISIBLE
+        } else {
+            _binding.detailsSV.visibility = View.VISIBLE
+            _binding.progressDrinkDetail.visibility = View.INVISIBLE
         }
     }
 
