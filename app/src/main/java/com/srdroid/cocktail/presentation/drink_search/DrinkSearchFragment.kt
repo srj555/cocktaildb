@@ -54,7 +54,7 @@ class DrinkSearchFragment : Fragment(), SearchView.OnQueryTextListener {
         }
 
         // observe and update UI based on result
-        updateUIBasedOnSearchResult()
+        updateUIBasedOnResult()
 
         // set item click listener
         onItemClicked()
@@ -63,23 +63,28 @@ class DrinkSearchFragment : Fragment(), SearchView.OnQueryTextListener {
     /**
      * Update UI based on results
      */
-    private fun updateUIBasedOnSearchResult() {
+    private fun updateUIBasedOnResult() {
+        // Observe Result
         lifecycle.coroutineScope.launchWhenCreated {
             viewModel.drinkSearchList.collect {
+                // On Loading State
                 if (it.isLoading) {
                     binding.nothingFound.visibility = View.GONE
                     binding.progressDrinkSearch.visibility = View.VISIBLE
                 }
+                // On Error State
                 if (it.error.isNotBlank()) {
                     binding.nothingFound.visibility = View.GONE
                     binding.progressDrinkSearch.visibility = View.GONE
                     Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
-
+                //On Success State
                 it.data?.let { result ->
                     if (result.isEmpty()) {
                         binding.nothingFound.visibility = View.VISIBLE
-                    }
+                    } else
+                        binding.nothingFound.visibility = View.GONE
+
                     binding.progressDrinkSearch.visibility = View.GONE
                     searchAdapter.setContentList(result.toMutableList())
                 }
@@ -123,7 +128,7 @@ class DrinkSearchFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        query?.let { viewModel.searchDrink(it) }
+        query?.let { viewModel.filterDrink(it) }
         return true
     }
 

@@ -3,6 +3,7 @@ package com.srdroid.cocktail.presentation.drink_search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.srdroid.cocktail.common.Resource
+import com.srdroid.cocktail.domain.model.Drink
 import com.srdroid.cocktail.domain.use_case.SearchDrinksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,7 +19,7 @@ class DrinkSearchViewModel @Inject constructor(
 
     private val _drinkSearchList = MutableStateFlow(DrinkSearchState())
     val drinkSearchList: StateFlow<DrinkSearchState> = _drinkSearchList
-
+    private lateinit var _memesList:List<Drink>
 
     fun searchDrink(s: String) {
         searchDrinksUseCase(s).onStart {
@@ -27,7 +28,8 @@ class DrinkSearchViewModel @Inject constructor(
         }.onEach {
             when (it) {
                 is Resource.Success -> {
-                    _drinkSearchList.value = DrinkSearchState(data = it.data)
+                    _memesList = it.data?: listOf()
+                    _drinkSearchList.value = DrinkSearchState(data = _memesList)
                 }
                 is Resource.Error -> {
                     _drinkSearchList.value = DrinkSearchState(error = it.message ?: "")
@@ -35,6 +37,16 @@ class DrinkSearchViewModel @Inject constructor(
                 else -> _drinkSearchList.value = DrinkSearchState(error = it.message ?: "")
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun filterDrink(s: String) {
+        // filter data
+        val filteredData = _memesList.filter {
+            it.name.lowercase().contains(s.lowercase())
+        }
+        // update data
+        _drinkSearchList.value =
+            DrinkSearchState(data = filteredData)
     }
 
 
