@@ -1,7 +1,7 @@
 package com.srdroid.cocktail.domain.use_case
 
 import com.srdroid.cocktail.common.Resource
-import com.srdroid.cocktail.data.model.toDomainDrink
+import com.srdroid.cocktail.data.model.toDomainMeme
 import com.srdroid.cocktail.domain.model.Drink
 import com.srdroid.cocktail.domain.repository.DrinkSearchRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +19,7 @@ class SearchDrinksUseCase @Inject constructor(private val repository: DrinkSearc
             val data =
                 repository.getDrinkSearch(q)
             val domainData =
-                if (data.drinks != null) data.drinks.map { it -> it.toDomainDrink() } else emptyList()
+                if (data.success) data.data.memes.map { it.toDomainMeme() } else emptyList()
             send(Resource.Success(data = domainData))
         } catch (e: HttpException) {
             send(Resource.Error(message = e.localizedMessage ?: "An Unknown error occurred"))

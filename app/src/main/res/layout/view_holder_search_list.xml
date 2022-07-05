@@ -25,15 +25,15 @@
 
             <ImageView
                 android:id="@+id/view_holder_image"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:src="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:imageRatio="@{drink.imageAspectRation}"
                 app:urlToImage="@{drink.image}"
                 />
 
@@ -42,7 +42,7 @@
                 android:id="@+id/view_holder_item_name"
                 style="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/md_theme_light_secondaryContainer"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"

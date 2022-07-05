@@ -5,7 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_cocktail.xml" value="0.12222222222222222" />
         <entry key="app/src/main/res/drawable/sync-48px.xml" value="0.12962962962962962" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_drink_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_drink_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/view_holder_search_list.xml" value="0.19202898550724637" />
         <entry key="app/src/main/res/menu/menu_cocktail.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12222222222222222" />
       </map>

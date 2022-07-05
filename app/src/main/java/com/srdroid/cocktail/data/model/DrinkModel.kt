@@ -60,13 +60,13 @@ data class DrinkModel(
 )
 
 
-fun DrinkModel.toDomainDrink(): Drink {
+/*fun DrinkModel.toDomainDrink(): Drink {
     return Drink(
         id = this.idDrink,
         name = this.strDrink ?: "",
         image = this.strDrinkThumb ?: ""
     )
-}
+}*/
 
 
 fun DrinkModel.toDomainDrinkDetails(): DrinkDetails {
